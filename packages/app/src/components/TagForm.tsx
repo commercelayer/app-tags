@@ -1,9 +1,10 @@
-import { Button, Spacer } from '@commercelayer/app-elements'
 import {
-  Form,
-  Input,
-  ValidationApiError
-} from '@commercelayer/app-elements-hook-form'
+  Button,
+  HookedForm,
+  HookedInput,
+  HookedValidationApiError,
+  Spacer
+} from '@commercelayer/app-elements'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type UseFormSetError } from 'react-hook-form'
 import { z } from 'zod'
@@ -41,22 +42,22 @@ export function TagForm({
   })
 
   return (
-    <Form
+    <HookedForm
       {...methods}
       onSubmit={(formValues) => {
         onSubmit(formValues, methods.setError)
       }}
     >
       <Spacer bottom='8'>
-        <Input name='name' label='Name' autoComplete='off' />
+        <HookedInput name='name' label='Name' autoComplete='off' />
       </Spacer>
 
       <Spacer top='14'>
         <Button type='submit' disabled={isSubmitting} className='w-full'>
           {defaultValues.name.length === 0 ? 'Create' : 'Update'}
         </Button>
-        <ValidationApiError apiError={apiError} />
+        <HookedValidationApiError apiError={apiError} />
       </Spacer>
-    </Form>
+    </HookedForm>
   )
 }
