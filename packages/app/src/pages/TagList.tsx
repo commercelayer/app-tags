@@ -1,7 +1,7 @@
 import { ListEmptyState } from '#components/ListEmptyState'
 import { ListItemTag } from '#components/ListItemTag'
 import { instructions } from '#data/filters'
-import { type ListType } from '#data/lists'
+import { presets, type ListType } from '#data/lists'
 import { appRoutes } from '#data/routes'
 import {
   Button,
@@ -31,9 +31,10 @@ export function TagList({ type }: Props): JSX.Element {
   const queryString = useSearch()
   const [, setLocation] = useLocation()
 
-  const { SearchWithNav, FilteredList } = useFilters({
-    instructions
-  })
+  const { SearchWithNav, FilteredList, viewTitle, hasActiveFilter } =
+    useFilters({
+      instructions
+    })
 
   const onGoBack =
     type === 'all'
@@ -44,6 +45,9 @@ export function TagList({ type }: Props): JSX.Element {
       : () => {
           setLocation(appRoutes.list.makePath())
         }
+
+  const isUserCustomFiltered =
+    hasActiveFilter && viewTitle === presets.all.viewTitle
 
   return (
     <PageLayout
@@ -78,7 +82,17 @@ export function TagList({ type }: Props): JSX.Element {
               updated_at: 'desc'
             }
           }}
-          emptyState={<ListEmptyState />}
+          emptyState={
+            <ListEmptyState
+              scope={
+                isUserCustomFiltered
+                  ? 'userFiltered'
+                  : viewTitle !== presets.all.viewTitle
+                  ? 'presetView'
+                  : 'history'
+              }
+            />
+          }
           actionButton={
             canUser('create', 'tags') ? (
               <Link href={appRoutes.new.makePath()}>
