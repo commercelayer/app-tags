@@ -1,5 +1,4 @@
 import { ErrorNotFound } from '#pages/ErrorNotFound'
-import { TagDelete } from '#pages/TagDelete'
 import { TagEdit } from '#pages/TagEdit'
 import { TagList } from '#pages/TagList'
 import { TagNew } from '#pages/TagNew'
@@ -50,9 +49,6 @@ export function App(): JSX.Element {
                 </Route>
                 <Route path={appRoutes.edit.path}>
                   <TagEdit />
-                </Route>
-                <Route path={appRoutes.delete.path}>
-                  <TagDelete />
                 </Route>
                 <Route>
                   <ErrorNotFound />

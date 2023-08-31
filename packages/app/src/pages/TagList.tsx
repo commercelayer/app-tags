@@ -7,9 +7,9 @@ import {
   Button,
   PageLayout,
   Spacer,
+  useFilters,
   useTokenProvider
 } from '@commercelayer/app-elements'
-import { useFilters } from '@commercelayer/app-elements-hook-form'
 import { Link, useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-location'
 
