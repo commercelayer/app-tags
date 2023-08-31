@@ -1,4 +1,5 @@
 import {
+  A,
   Button,
   EmptyState,
   useTokenProvider
@@ -7,10 +8,14 @@ import { Link } from 'wouter'
 
 import { appRoutes } from '#data/routes'
 
-export function ListEmptyState(): JSX.Element {
+interface Props {
+  scope?: 'history' | 'userFiltered' | 'presetView'
+}
+
+export function ListEmptyState({ scope = 'history' }: Props): JSX.Element {
   const { canUser } = useTokenProvider()
 
-  if (canUser('create', 'tags')) {
+  if (scope === 'presetView') {
     return (
       <EmptyState
         title='No tags yet!'
@@ -26,12 +31,34 @@ export function ListEmptyState(): JSX.Element {
     )
   }
 
+  if (scope === 'userFiltered') {
+    return (
+      <EmptyState
+        title='No tags found!'
+        description={
+          <div>
+            <p>
+              We didn't find any tags matching the current filters selection.
+            </p>
+          </div>
+        }
+      />
+    )
+  }
+
   return (
     <EmptyState
-      title='No tags found!'
+      title='No tags yet!'
       description={
         <div>
-          <p>We didn't find any tags matching the current filters selection.</p>
+          <p>Add a tag with the API, or use the CLI.</p>
+          <A
+            target='_blank'
+            href='https://docs.commercelayer.io/core/v/api-reference/tags'
+            rel='noreferrer'
+          >
+            View API reference.
+          </A>
         </div>
       }
     />
