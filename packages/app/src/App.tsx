@@ -5,6 +5,7 @@ import { TagNew } from '#pages/TagNew'
 import {
   CoreSdkProvider,
   ErrorBoundary,
+  MetaTags,
   PageSkeleton,
   TokenProvider
 } from '@commercelayer/app-elements'
@@ -35,6 +36,7 @@ export function App(): JSX.Element {
           loadingElement={<PageSkeleton />}
           devMode={isDev}
         >
+          <MetaTags />
           <CoreSdkProvider>
             <Router base={basePath}>
               <Switch>
