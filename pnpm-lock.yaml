@@ -20,8 +20,8 @@ importers:
   packages/app:
     dependencies:
       '@commercelayer/app-elements':
-        specifier: ^0.3.2
-        version: 0.3.2(@commercelayer/sdk@5.13.2)(query-string@8.1.0)(react-dom@18.2.0)(react-hook-form@7.47.0)(react@18.2.0)(wouter@2.11.0)
+        specifier: ^1.0.1
+        version: 1.0.1(@commercelayer/sdk@5.13.2)(query-string@8.1.0)(react-dom@18.2.0)(react-hook-form@7.47.0)(react@18.2.0)(wouter@2.11.0)
       '@commercelayer/sdk':
         specifier: 5.13.2
         version: 5.13.2
@@ -66,11 +66,11 @@ importers:
         specifier: ^4.14.191
         version: 4.14.191
       '@types/react':
-        specifier: ^18.2.21
+        specifier: ^18.2.24
         version: 18.2.24
       '@types/react-dom':
-        specifier: ^18.2.7
-        version: 18.2.7
+        specifier: ^18.2.8
+        version: 18.2.8
       '@vitejs/plugin-react':
         specifier: ^4.0.4
         version: 4.1.0(vite@4.4.10)
@@ -354,8 +354,8 @@ packages:
     dev: true
     optional: true
 
-  /@commercelayer/app-elements@0.3.2(@commercelayer/sdk@5.13.2)(query-string@8.1.0)(react-dom@18.2.0)(react-hook-form@7.47.0)(react@18.2.0)(wouter@2.11.0):
-    resolution: {integrity: sha512-ElyUIiMQKR0dYZI9/i9PmM1GxtIa5PFqhs5RFu20tDb3ImqnYREbFDZEZ85VJ6fLt4wX+yYggWHTKjOlgaLIBQ==}
+  /@commercelayer/app-elements@1.0.1(@commercelayer/sdk@5.13.2)(query-string@8.1.0)(react-dom@18.2.0)(react-hook-form@7.47.0)(react@18.2.0)(wouter@2.11.0):
+    resolution: {integrity: sha512-IHDT3f0Vz614xqY4oudLd/68RD3IfZPemjleBD3g7w25B0M6qm93IM2RZAnclZIcDlVUAJbCAdYl4ddi+hhbfg==}
     engines: {node: '>=18', pnpm: '>=7'}
     peerDependencies:
       '@commercelayer/sdk': ^5.x
@@ -369,18 +369,18 @@ packages:
       '@commercelayer/sdk': 5.13.2
       '@types/lodash': 4.14.199
       '@types/react': 18.2.24
-      '@types/react-datepicker': 4.15.0(react-dom@18.2.0)(react@18.2.0)
-      '@types/react-dom': 18.2.7
+      '@types/react-datepicker': 4.15.1(react-dom@18.2.0)(react@18.2.0)
+      '@types/react-dom': 18.2.8
       classnames: 2.3.2
       jwt-decode: 3.1.2
       lodash: 4.17.21
       query-string: 8.1.0
       react: 18.2.0
       react-currency-input-field: 3.6.11(react@18.2.0)
-      react-datepicker: 4.16.0(react-dom@18.2.0)(react@18.2.0)
+      react-datepicker: 4.18.0(react-dom@18.2.0)(react@18.2.0)
       react-dom: 18.2.0(react@18.2.0)
       react-hook-form: 7.47.0(react@18.2.0)
-      react-select: 5.7.4(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+      react-select: 5.7.7(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
       swr: 2.2.4(react@18.2.0)
       ts-invariant: 0.10.3
       type-fest: 4.3.3
@@ -1497,8 +1497,8 @@ packages:
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
-  /@types/react-datepicker@4.15.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-kr10s8ex4+MmCJmzdhA9kfmoMQBmsW5uDYDlH+8f/PgStrp7rRaz23Y/cvTiMgvESVq8ujDh4SOo6jlSwEw13g==}
+  /@types/react-datepicker@4.15.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6/LthK0pTDBKjjVJqA2ygY3jJsHH7uZXIk8WPQcGHUiFOQLOKIv3krOxFZ2mt3BB3guMB6jVTc6ansQAd0r7xQ==}
     dependencies:
       '@popperjs/core': 2.11.8
       '@types/react': 18.2.24
@@ -1509,8 +1509,8 @@ packages:
       - react-dom
     dev: false
 
-  /@types/react-dom@18.2.7:
-    resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
+  /@types/react-dom@18.2.8:
+    resolution: {integrity: sha512-bAIvO5lN/U8sPGvs1Xm61rlRHHaq5rp5N3kp9C+NJ/Q41P8iqjkXSu0+/qu8POsjH9pNWb0OYabFez7taP7omw==}
     dependencies:
       '@types/react': 18.2.24
 
@@ -6244,8 +6244,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-datepicker@4.16.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-hNQ0PAg/LQoVbDUO/RWAdm/RYmPhN3cz7LuQ3hqbs24OSp69QCiKOJRrQ4jk1gv1jNR5oYu8SjjgfDh8q6Q1yw==}
+  /react-datepicker@4.18.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-0MYt3HmLbHVk1sw4v+RCbLAVg5TA3jWP7RyjZbo53PC+SEi+pjdgc92lB53ai/ENZaTOhbXmgni9GzvMrorMAw==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18
       react-dom: ^16.9.0 || ^17 || ^18
@@ -6318,8 +6318,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-select@5.7.4(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-NhuE56X+p9QDFh4BgeygHFIvJJszO1i1KSkg/JPcIJrbovyRtI+GuOEa4XzFCEpZRAEoEI8u/cAHK+jG/PgUzQ==}
+  /react-select@5.7.7(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HhashZZJDRlfF/AKj0a0Lnfs3sRdw/46VJIRd8IbB9/Ovr74+ZIwkAdSBjSPXsFMG+u72c5xShqwLSKIJllzqw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
