@@ -2,9 +2,9 @@ import { appRoutes } from '#data/routes'
 import { isMock, makeTag } from '#mocks'
 import {
   Button,
-  ContextMenu,
-  DropdownMenuDivider,
-  DropdownMenuItem,
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
   ListItem,
   PageLayout,
   Text,
@@ -13,97 +13,96 @@ import {
   useTokenProvider,
   withSkeletonTemplate
 } from '@commercelayer/app-elements'
-import type { ResourceListItemProps } from '@commercelayer/app-elements/dist/ui/resources/ResourceList'
-import { DotsThree } from '@phosphor-icons/react'
+import type { ResourceListItemTemplateProps } from '@commercelayer/app-elements/dist/src/ui/resources/ResourceList/ResourceList'
+
 import { useState } from 'react'
 import { useLocation } from 'wouter'
 
-export const ListItemTag = withSkeletonTemplate<ResourceListItemProps<'tags'>>(
-  ({ resource = makeTag(), remove }) => {
-    const [, setLocation] = useLocation()
-    const { canUser } = useTokenProvider()
-    const { sdkClient } = useCoreSdkProvider()
+export const ListItemTag = withSkeletonTemplate<
+  ResourceListItemTemplateProps<'tags'>
+>(({ resource = makeTag(), remove }) => {
+  const [, setLocation] = useLocation()
+  const { canUser } = useTokenProvider()
+  const { sdkClient } = useCoreSdkProvider()
 
-    const { Overlay, open, close } = useOverlay()
+  const { Overlay, open, close } = useOverlay()
 
-    const [isDeleteting, setIsDeleting] = useState(false)
+  const [isDeleteting, setIsDeleting] = useState(false)
 
-    const contextMenuEdit = canUser('update', 'tags') && !isMock(resource) && (
-      <DropdownMenuItem
-        label='Edit'
-        onClick={() => {
-          setLocation(appRoutes.edit.makePath(resource.id))
-        }}
-      />
-    )
+  const contextMenuEdit = canUser('update', 'tags') && !isMock(resource) && (
+    <DropdownItem
+      label='Edit'
+      onClick={() => {
+        setLocation(appRoutes.edit.makePath(resource.id))
+      }}
+    />
+  )
 
-    const contextMenuDivider = canUser('update', 'tags') &&
-      canUser('destroy', 'tags') && <DropdownMenuDivider />
+  const contextMenuDivider = canUser('update', 'tags') &&
+    canUser('destroy', 'tags') && <DropdownDivider />
 
-    const contextMenuDelete = canUser('destroy', 'tags') && (
-      <DropdownMenuItem
-        label='Delete'
-        onClick={() => {
-          open()
-        }}
-      />
-    )
+  const contextMenuDelete = canUser('destroy', 'tags') && (
+    <DropdownItem
+      label='Delete'
+      onClick={() => {
+        open()
+      }}
+    />
+  )
 
-    const contextMenu = (
-      <ContextMenu
-        menuLabel={<DotsThree size={24} />}
-        menuItems={
-          <>
-            {contextMenuEdit}
-            {contextMenuDivider}
-            {contextMenuDelete}
-          </>
-        }
-      />
-    )
+  const contextMenu = (
+    <Dropdown
+      dropdownItems={
+        <>
+          {contextMenuEdit}
+          {contextMenuDivider}
+          {contextMenuDelete}
+        </>
+      }
+    />
+  )
 
-    return (
-      <>
-        <ListItem tag='div'>
-          <div>
-            <Text tag='span' weight='semibold'>
-              {resource.name}
-            </Text>
-          </div>
-          {contextMenu}
-        </ListItem>
-        {canUser('destroy', 'tags') && (
-          <Overlay>
-            <PageLayout
-              title={`Confirm that you want to cancel the ${resource.name} tag.`}
-              description='This action cannot be undone, proceed with caution.'
-              minHeight={false}
-              onGoBack={() => {
-                close()
+  return (
+    <>
+      <ListItem tag='div'>
+        <div>
+          <Text tag='span' weight='semibold'>
+            {resource.name}
+          </Text>
+        </div>
+        {contextMenu}
+      </ListItem>
+      {canUser('destroy', 'tags') && (
+        <Overlay>
+          <PageLayout
+            title={`Confirm that you want to cancel the ${resource.name} tag.`}
+            description='This action cannot be undone, proceed with caution.'
+            minHeight={false}
+            onGoBack={() => {
+              close()
+            }}
+          >
+            <Button
+              variant='danger'
+              size='small'
+              disabled={isDeleteting}
+              onClick={(e) => {
+                setIsDeleting(true)
+                e.stopPropagation()
+                void sdkClient.tags
+                  .delete(resource.id)
+                  .then(() => {
+                    remove?.()
+                    close()
+                  })
+                  .catch(() => {})
               }}
             >
-              <Button
-                variant='danger'
-                size='small'
-                disabled={isDeleteting}
-                onClick={(e) => {
-                  setIsDeleting(true)
-                  e.stopPropagation()
-                  void sdkClient.tags
-                    .delete(resource.id)
-                    .then(() => {
-                      remove?.()
-                      close()
-                    })
-                    .catch(() => {})
-                }}
-              >
-                Delete tag
-              </Button>
-            </PageLayout>
-          </Overlay>
-        )}
-      </>
-    )
-  }
-)
+              Delete tag
+            </Button>
+          </PageLayout>
+        </Overlay>
+      )}
+    </>
+  )
+})

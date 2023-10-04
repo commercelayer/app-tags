@@ -7,7 +7,7 @@ import {
   Button,
   PageLayout,
   Spacer,
-  useFilters,
+  useResourceFilters,
   useTokenProvider
 } from '@commercelayer/app-elements'
 import { Link, useLocation } from 'wouter'
@@ -32,7 +32,7 @@ export function TagList({ type }: Props): JSX.Element {
   const [, setLocation] = useLocation()
 
   const { SearchWithNav, FilteredList, viewTitle, hasActiveFilter } =
-    useFilters({
+    useResourceFilters({
       instructions
     })
 
@@ -72,7 +72,7 @@ export function TagList({ type }: Props): JSX.Element {
       <Spacer bottom='14'>
         <FilteredList
           type='tags'
-          Item={ListItemTag}
+          ItemTemplate={ListItemTag}
           query={{
             fields: {
               tags: ['id', 'name', 'created_at', 'updated_at']
