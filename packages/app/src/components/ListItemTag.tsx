@@ -13,7 +13,7 @@ import {
   useTokenProvider,
   withSkeletonTemplate
 } from '@commercelayer/app-elements'
-import type { ResourceListItemTemplateProps } from '@commercelayer/app-elements/dist/src/ui/resources/ResourceList/ResourceList'
+import type { ResourceListItemTemplateProps } from '@commercelayer/app-elements/dist/ui/resources/ResourceList/ResourceList'
 
 import { useState } from 'react'
 import { useLocation } from 'wouter'
