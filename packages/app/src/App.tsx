@@ -5,6 +5,7 @@ import { TagNew } from '#pages/TagNew'
 import {
   CoreSdkProvider,
   ErrorBoundary,
+  GTMProvider,
   MetaTags,
   PageSkeleton,
   TokenProvider
@@ -37,28 +38,30 @@ export function App(): JSX.Element {
           devMode={isDev}
           organizationSlug={import.meta.env.PUBLIC_SELF_HOSTED_SLUG}
         >
-          <MetaTags />
-          <CoreSdkProvider>
-            <Router base={basePath}>
-              <Switch>
-                <Route path={appRoutes.home.path}>
-                  <Redirect to={appRoutes.list.path} />
-                </Route>
-                <Route path={appRoutes.list.path}>
-                  <TagList type='all' />
-                </Route>
-                <Route path={appRoutes.new.path}>
-                  <TagNew />
-                </Route>
-                <Route path={appRoutes.edit.path}>
-                  <TagEdit />
-                </Route>
-                <Route>
-                  <ErrorNotFound />
-                </Route>
-              </Switch>
-            </Router>
-          </CoreSdkProvider>
+          <GTMProvider gtmId={window.clAppConfig.gtmId}>
+            <MetaTags />
+            <CoreSdkProvider>
+              <Router base={basePath}>
+                <Switch>
+                  <Route path={appRoutes.home.path}>
+                    <Redirect to={appRoutes.list.path} />
+                  </Route>
+                  <Route path={appRoutes.list.path}>
+                    <TagList type='all' />
+                  </Route>
+                  <Route path={appRoutes.new.path}>
+                    <TagNew />
+                  </Route>
+                  <Route path={appRoutes.edit.path}>
+                    <TagEdit />
+                  </Route>
+                  <Route>
+                    <ErrorNotFound />
+                  </Route>
+                </Switch>
+              </Router>
+            </CoreSdkProvider>
+          </GTMProvider>
         </TokenProvider>
       </SWRConfig>
     </ErrorBoundary>
