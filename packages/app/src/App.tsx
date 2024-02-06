@@ -47,7 +47,7 @@ export function App(): JSX.Element {
                     <Redirect to={appRoutes.list.path} />
                   </Route>
                   <Route path={appRoutes.list.path}>
-                    <TagList type='all' />
+                    <TagList />
                   </Route>
                   <Route path={appRoutes.new.path}>
                     <TagNew />

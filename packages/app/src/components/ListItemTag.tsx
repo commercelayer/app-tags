@@ -78,8 +78,12 @@ export const ListItemTag = withSkeletonTemplate<
             title={`Confirm that you want to cancel the ${resource.name} tag.`}
             description='This action cannot be undone, proceed with caution.'
             minHeight={false}
-            onGoBack={() => {
-              close()
+            navigationButton={{
+              label: 'Cancel',
+              icon: 'x',
+              onClick: () => {
+                close()
+              }
             }}
           >
             <Button
