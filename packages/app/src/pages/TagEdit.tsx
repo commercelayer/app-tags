@@ -33,8 +33,12 @@ export function TagEdit(): JSX.Element {
     return (
       <PageLayout
         title='Edit tag'
-        onGoBack={() => {
-          setLocation(goBackUrl)
+        navigationButton={{
+          label: 'Back',
+          icon: 'arrowLeft',
+          onClick: () => {
+            setLocation(goBackUrl)
+          }
         }}
       >
         <EmptyState
@@ -55,8 +59,12 @@ export function TagEdit(): JSX.Element {
       title={
         <SkeletonTemplate isLoading={isLoading}>Edit tag</SkeletonTemplate>
       }
-      onGoBack={() => {
-        setLocation(goBackUrl)
+      navigationButton={{
+        label: 'Back',
+        icon: 'arrowLeft',
+        onClick: () => {
+          setLocation(goBackUrl)
+        }
       }}
     >
       <ScrollToTop />

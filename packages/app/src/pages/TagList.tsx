@@ -1,7 +1,7 @@
 import { ListEmptyState } from '#components/ListEmptyState'
 import { ListItemTag } from '#components/ListItemTag'
 import { instructions } from '#data/filters'
-import { presets, type ListType } from '#data/lists'
+import { presets } from '#data/lists'
 import { appRoutes } from '#data/routes'
 import {
   Button,
@@ -11,17 +11,9 @@ import {
   useTokenProvider
 } from '@commercelayer/app-elements'
 import { Link, useLocation } from 'wouter'
-import { navigate, useSearch } from 'wouter/use-location'
+import { navigate, useSearch } from 'wouter/use-browser-location'
 
-interface Props {
-  type: ListType
-}
-
-const pageTitle: Record<ListType, string> = {
-  all: 'Tags'
-}
-
-export function TagList({ type }: Props): JSX.Element {
+export function TagList(): JSX.Element {
   const {
     dashboardUrl,
     settings: { mode },
@@ -36,24 +28,21 @@ export function TagList({ type }: Props): JSX.Element {
       instructions
     })
 
-  const onGoBack =
-    type === 'all'
-      ? () => {
-          window.location.href =
-            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
-        }
-      : () => {
-          setLocation(appRoutes.list.makePath())
-        }
-
   const isUserCustomFiltered =
     hasActiveFilter && viewTitle === presets.all.viewTitle
 
   return (
     <PageLayout
-      title={pageTitle[type]}
+      title='Tags'
       mode={mode}
-      onGoBack={onGoBack}
+      navigationButton={{
+        label: 'Hub',
+        icon: 'arrowLeft',
+        onClick: () => {
+          window.location.href =
+            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
+        }
+      }}
       gap='only-top'
     >
       <SearchWithNav
@@ -88,8 +77,8 @@ export function TagList({ type }: Props): JSX.Element {
                 isUserCustomFiltered
                   ? 'userFiltered'
                   : viewTitle !== presets.all.viewTitle
-                  ? 'presetView'
-                  : 'history'
+                    ? 'presetView'
+                    : 'history'
               }
             />
           }

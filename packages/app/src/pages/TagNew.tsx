@@ -27,8 +27,12 @@ export function TagNew(): JSX.Element {
     return (
       <PageLayout
         title='New tag'
-        onGoBack={() => {
-          setLocation(goBackUrl)
+        navigationButton={{
+          label: 'Back',
+          icon: 'arrowLeft',
+          onClick: () => {
+            setLocation(goBackUrl)
+          }
         }}
       >
         <EmptyState
@@ -47,8 +51,12 @@ export function TagNew(): JSX.Element {
   return (
     <PageLayout
       title={<>New tag</>}
-      onGoBack={() => {
-        setLocation(goBackUrl)
+      navigationButton={{
+        label: 'Tags',
+        icon: 'arrowLeft',
+        onClick: () => {
+          setLocation(goBackUrl)
+        }
       }}
     >
       <ScrollToTop />
