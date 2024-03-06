@@ -66,6 +66,7 @@ export function TagEdit(): JSX.Element {
           setLocation(goBackUrl)
         }
       }}
+      overlay
     >
       <ScrollToTop />
       <Spacer bottom='14'>
