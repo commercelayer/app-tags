@@ -58,6 +58,7 @@ export function TagNew(): JSX.Element {
           setLocation(goBackUrl)
         }
       }}
+      overlay
     >
       <ScrollToTop />
       <Spacer bottom='14'>

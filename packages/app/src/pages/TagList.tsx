@@ -5,7 +5,7 @@ import { presets } from '#data/lists'
 import { appRoutes } from '#data/routes'
 import {
   Button,
-  PageLayout,
+  HomePageLayout,
   Spacer,
   useResourceFilters,
   useTokenProvider
@@ -14,11 +14,7 @@ import { Link, useLocation } from 'wouter'
 import { navigate, useSearch } from 'wouter/use-browser-location'
 
 export function TagList(): JSX.Element {
-  const {
-    dashboardUrl,
-    settings: { mode },
-    canUser
-  } = useTokenProvider()
+  const { canUser } = useTokenProvider()
 
   const queryString = useSearch()
   const [, setLocation] = useLocation()
@@ -32,19 +28,7 @@ export function TagList(): JSX.Element {
     hasActiveFilter && viewTitle === presets.all.viewTitle
 
   return (
-    <PageLayout
-      title='Tags'
-      mode={mode}
-      navigationButton={{
-        label: 'Hub',
-        icon: 'arrowLeft',
-        onClick: () => {
-          window.location.href =
-            dashboardUrl != null ? `${dashboardUrl}/hub` : '/'
-        }
-      }}
-      gap='only-top'
-    >
+    <HomePageLayout title='Tags'>
       <SearchWithNav
         queryString={queryString}
         onUpdate={(qs) => {
@@ -91,6 +75,6 @@ export function TagList(): JSX.Element {
           }
         />
       </Spacer>
-    </PageLayout>
+    </HomePageLayout>
   )
 }
