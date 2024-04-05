@@ -5,6 +5,7 @@ import {
   Dropdown,
   DropdownDivider,
   DropdownItem,
+  Icon,
   ListItem,
   PageLayout,
   Text,
@@ -52,6 +53,7 @@ export const ListItemTag = withSkeletonTemplate<
 
   const contextMenu = (
     <Dropdown
+      dropdownLabel={<Icon name='dotsThree' size='24' />}
       dropdownItems={
         <>
           {contextMenuEdit}
@@ -64,7 +66,7 @@ export const ListItemTag = withSkeletonTemplate<
 
   return (
     <>
-      <ListItem tag='div'>
+      <ListItem>
         <div>
           <Text tag='span' weight='semibold'>
             {resource.name}
