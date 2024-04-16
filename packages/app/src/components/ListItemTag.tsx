@@ -1,5 +1,5 @@
 import { appRoutes } from '#data/routes'
-import { isMock, makeTag } from '#mocks'
+import { isMock, isMockedId, makeTag } from '#mocks'
 import {
   Button,
   Dropdown,
@@ -10,6 +10,7 @@ import {
   PageLayout,
   Text,
   useCoreSdkProvider,
+  useEditMetadataOverlay,
   useOverlay,
   useTokenProvider,
   withSkeletonTemplate
@@ -28,39 +29,54 @@ export const ListItemTag = withSkeletonTemplate<
 
   const { Overlay, open, close } = useOverlay()
 
+  const { Overlay: EditMetadataOverlay, show: showEditMetadataOverlay } =
+    useEditMetadataOverlay()
+
   const [isDeleteting, setIsDeleting] = useState(false)
 
-  const contextMenuEdit = canUser('update', 'tags') && !isMock(resource) && (
-    <DropdownItem
-      label='Edit'
-      onClick={() => {
-        setLocation(appRoutes.edit.makePath(resource.id))
-      }}
-    />
-  )
+  const dropdownItems: JSX.Element[] = []
 
-  const contextMenuDivider = canUser('update', 'tags') &&
-    canUser('destroy', 'tags') && <DropdownDivider />
+  if (canUser('update', 'tags') && !isMock(resource)) {
+    dropdownItems.push(
+      <DropdownItem
+        label='Edit'
+        onClick={() => {
+          setLocation(appRoutes.edit.makePath(resource.id))
+        }}
+      />
+    )
+  }
 
-  const contextMenuDelete = canUser('destroy', 'tags') && (
-    <DropdownItem
-      label='Delete'
-      onClick={() => {
-        open()
-      }}
-    />
-  )
+  if (canUser('update', 'tags')) {
+    dropdownItems.push(
+      <DropdownItem
+        label='Set metadata'
+        onClick={() => {
+          showEditMetadataOverlay()
+        }}
+      />
+    )
+  }
+
+  if (canUser('destroy', 'tags')) {
+    if (dropdownItems.length > 0) {
+      dropdownItems.push(<DropdownDivider />)
+    }
+
+    dropdownItems.push(
+      <DropdownItem
+        label='Delete'
+        onClick={() => {
+          open()
+        }}
+      />
+    )
+  }
 
   const contextMenu = (
     <Dropdown
       dropdownLabel={<Icon name='dotsThree' size='24' />}
-      dropdownItems={
-        <>
-          {contextMenuEdit}
-          {contextMenuDivider}
-          {contextMenuDelete}
-        </>
-      }
+      dropdownItems={dropdownItems}
     />
   )
 
@@ -72,6 +88,14 @@ export const ListItemTag = withSkeletonTemplate<
             {resource.name}
           </Text>
         </div>
+        {!isMockedId(resource.id) && (
+          <EditMetadataOverlay
+            resourceType={resource.type}
+            resourceId={resource.id}
+            title='Edit metadata'
+            description={`${resource.name}`}
+          />
+        )}
         {contextMenu}
       </ListItem>
       {canUser('destroy', 'tags') && (
@@ -95,13 +119,10 @@ export const ListItemTag = withSkeletonTemplate<
               onClick={(e) => {
                 setIsDeleting(true)
                 e.stopPropagation()
-                void sdkClient.tags
-                  .delete(resource.id)
-                  .then(() => {
-                    remove?.()
-                    close()
-                  })
-                  .catch(() => {})
+                void sdkClient.tags.delete(resource.id).then(() => {
+                  remove?.()
+                  close()
+                })
               }}
             >
               Delete tag
