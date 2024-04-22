@@ -56,7 +56,9 @@ export function TagForm({
         <Button type='submit' disabled={isSubmitting} className='w-full'>
           {defaultValues.name.length === 0 ? 'Create' : 'Update'}
         </Button>
-        <HookedValidationApiError apiError={apiError} />
+        <Spacer top='2'>
+          <HookedValidationApiError apiError={apiError} />
+        </Spacer>
       </Spacer>
     </HookedForm>
   )
