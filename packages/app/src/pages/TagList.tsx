@@ -77,7 +77,7 @@ export function TagList(): JSX.Element {
                   aria-label='Add tag'
                 >
                   <Icon name='plus' />
-                  Tag
+                  New
                 </Button>
               </Link>
             ) : undefined
