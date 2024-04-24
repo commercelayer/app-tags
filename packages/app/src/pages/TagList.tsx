@@ -6,6 +6,7 @@ import { appRoutes } from '#data/routes'
 import {
   Button,
   HomePageLayout,
+  Icon,
   Spacer,
   useResourceFilters,
   useTokenProvider
@@ -68,8 +69,16 @@ export function TagList(): JSX.Element {
           }
           actionButton={
             canUser('create', 'tags') ? (
-              <Link href={appRoutes.new.makePath()}>
-                <Button variant='link'>Add new</Button>
+              <Link href={appRoutes.new.makePath()} asChild>
+                <Button
+                  variant='secondary'
+                  size='mini'
+                  alignItems='center'
+                  aria-label='Add tag'
+                >
+                  <Icon name='plus' />
+                  Tag
+                </Button>
               </Link>
             ) : undefined
           }

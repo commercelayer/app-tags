@@ -92,8 +92,7 @@ export const ListItemTag = withSkeletonTemplate<
           <EditMetadataOverlay
             resourceType={resource.type}
             resourceId={resource.id}
-            title='Edit metadata'
-            description={`${resource.name}`}
+            title={resource.name}
           />
         )}
         {contextMenu}
